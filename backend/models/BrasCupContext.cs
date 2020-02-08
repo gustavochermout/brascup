@@ -10,5 +10,6 @@ namespace BrasCup.Models
         }
 
         public DbSet<Time> Time { get; set; }
+        public DbSet<Jogador> Jogador { get; set; }
     }
 }

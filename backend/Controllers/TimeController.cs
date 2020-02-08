@@ -31,6 +31,15 @@ namespace BrasCup.Controllers
             return time;
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Time>> PostTime(Time time)
+        {
+            _context.Time.Add(time);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetTime), new { id = time.Id }, time);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTime(int id, Time time)
         {
@@ -51,6 +60,20 @@ namespace BrasCup.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Time>> DeleteTime(int id)
+        {
+            var time = await _context.Time.FindAsync(id);
+
+            if (time == null)
+                return NotFound();
+
+            _context.Time.Remove(time);
+            await _context.SaveChangesAsync();
+
+            return time;
         }
     }
 }
