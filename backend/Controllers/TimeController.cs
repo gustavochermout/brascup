@@ -44,9 +44,7 @@ namespace BrasCup.Controllers
         public async Task<IActionResult> PutTime(int id, Time time)
         {
             if (id != time.Id)
-            {
                 return BadRequest();
-            }
 
             _context.Entry(time).State = EntityState.Modified;    
 
