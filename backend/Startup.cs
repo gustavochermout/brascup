@@ -27,6 +27,15 @@ namespace BrasCup
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                builder =>
+                {
+                    builder.AllowAnyOrigin();
+                });
+            });
+
             services.AddDbContext<BrasCupContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
         }
@@ -38,6 +47,8 @@ namespace BrasCup
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("AllowAll");
 
             app.UseHttpsRedirection();
 
