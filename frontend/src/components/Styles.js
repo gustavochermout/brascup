@@ -54,6 +54,11 @@ export const CancelButtonHover = styled.div`
     }
 `
 
+export const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+`
+
 export const Label = styled.label`
     font-size: 15px;
     color: #444;

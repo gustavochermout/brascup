@@ -32,7 +32,10 @@ namespace BrasCup
                 options.AddPolicy("AllowAll",
                 builder =>
                 {
-                    builder.AllowAnyOrigin();
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
                 });
             });
 
