@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import List from '../components/List';
 import api from '../services/api';
 
-export default function Jogador() {
+export default function JogadorList() {
     const [jogadores, setJogadores] = useState([]);
 
     useEffect(() => {

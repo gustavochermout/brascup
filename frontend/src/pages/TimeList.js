@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import List from '../components/List';
 import api from '../services/api';
 
-export default function Time() {
+export default function TimeList() {
     const [times, setTimes] = useState([]);
 
     useEffect(() => {
