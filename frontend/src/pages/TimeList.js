@@ -16,6 +16,6 @@ export default function TimeList() {
     }, []);
 
     return (
-        <List title="Times" items={times}/>
+        <List linkToNew="/times-edicao" title="Times" items={times}/>
     )
 }

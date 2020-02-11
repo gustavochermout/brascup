@@ -16,6 +16,6 @@ export default function JogadorList() {
     }, []);
 
     return (
-        <List title="Jogadores" items={jogadores}/>
+        <List linkToNew="/jogadores-edicao" title="Jogadores" items={jogadores}/>
     )
 }
