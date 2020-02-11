@@ -74,3 +74,25 @@ export const Input = styled.input`
     font-size: 15px;
     margin-bottom: 10px;
 `
+
+export const ContainerList = styled.div`
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    background: #FFF;
+    border-radius: 4px;
+    padding: 15px;
+`
+
+export const ContainerEdit = styled.div`
+    width: 100%;
+    max-width: 445px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    background: #FFF;
+    border-radius: 4px;
+    padding: 15px;
+`

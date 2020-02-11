@@ -1,53 +1,42 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import api from '../services/api';
 import { ContainerEdit, Line, Button, ButtonHover, Title, Footer, CancelButton, CancelButtonHover, Label, Input, Form } from '../components/Styles';
 
-export default function TimeEdit() {
+export default function JogadorEdit() {
     const [nome, setNome] = useState('');
-    const [tecnico, setTecnico] = useState('');
-
-    async function handleSubmit(e) {
-        e.preventDefault();
-
-        await api.post('/time', {
-            nome,
-            tecnico
-        });
-
-        setNome('');
-        setTecnico('');
-    }
+    const [idade, setIdade] = useState(null);
 
     return (
         <ContainerEdit>
-            <Form onSubmit={handleSubmit}>
-                <Title>Time</Title>
+            <Form>
+                <Title>Jogador</Title>
                 <Line />
-                
+
                 <Label>Nome</Label>
                 <Input 
-                    type="text" 
-                    id="nome" 
-                    placeholder="Nome do time"
+                    type="text"
+                    id="nome"
+                    placeholder="Nome do jogador"
                     required
                     value={nome}
-                    onChange={e => setNome(e.target.value)}
+                    onChange={e => setNome(e.target.value)}                
                 />
-                
-                <Label>Técnico</Label>
+
+                <Label>Idade</Label>
                 <Input 
-                    type="text" 
-                    id="tecnico" 
-                    placeholder="Quem vai conduzir as vitórias?"
-                    value={tecnico}
-                    onChange={e => setTecnico(e.target.value)}
+                    type="number"
+                    id="idade"
+                    placeholder="Idade do jogador"
+                    value={idade}
+                    onChange={e => setIdade(e.target.value)}
+                    min="1"
+                    max="99"
                 />
-                
+
                 <Line />
                 <Footer>
-                    <Link to="/times">
+                    <Link to="/jogadores">
                         <CancelButtonHover>
                             <CancelButton>Voltar</CancelButton>
                         </CancelButtonHover>

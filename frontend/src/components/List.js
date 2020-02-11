@@ -3,19 +3,8 @@ import styled from 'styled-components';
 import { ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { Line, Button, ButtonHover, Title, Footer } from './Styles';
+import { ContainerList, Line, Button, ButtonHover, Title, Footer } from './Styles';
 import ListItem from './ListItem';
-
-const Container = styled.div`
-    width: 100%;
-    max-width: 600px;
-    margin: 50px auto;
-    display: flex;
-    flex-direction: column;
-    background: #FFF;
-    border-radius: 4px;
-    padding: 15px;
-`
 
 const Items = styled.div`
     width: 100%;
@@ -25,7 +14,7 @@ const Items = styled.div`
 
 export default function List({ title, items, linkToNew }) {
     return (
-        <Container>
+        <ContainerList>
             <Title>{title}</Title>
             <Line />
             <Items>
@@ -43,6 +32,6 @@ export default function List({ title, items, linkToNew }) {
                     </ButtonHover>
                 </Link>
             </Footer>
-        </Container>
+        </ContainerList>
     )
 }
