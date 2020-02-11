@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ContainerEdit, Line, Button, ButtonHover, Title, Footer, CancelButton, CancelButtonHover, Label, Input, Form } from '../components/Styles';
+import { ContainerEdit, Line, Button, ButtonHover, Title, Footer, CancelButton, CancelButtonHover, Label, Input, Form, Select } from '../components/Styles';
 
 export default function JogadorEdit() {
     const [nome, setNome] = useState('');
@@ -32,6 +32,11 @@ export default function JogadorEdit() {
                     onChange={e => setIdade(e.target.value)}
                     min="1"
                     max="99"
+                />
+
+                <Label>Time</Label>
+                <Select 
+                    id="time"
                 />
 
                 <Line />

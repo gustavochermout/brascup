@@ -96,3 +96,12 @@ export const ContainerEdit = styled.div`
     border-radius: 4px;
     padding: 15px;
 `
+
+export const Select = styled.select`
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    height: 40px;
+    padding: 0 15px;
+    font-size: 15px;
+    margin-bottom: 10px;
+`
