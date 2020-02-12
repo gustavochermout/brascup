@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { ContainerList, Line, Button, ButtonHover, Title, Footer } from './Styles';
+import { ContainerList, Line, Button, ButtonHover, Title, Footer } from './../Styles';
 import ListItem from './ListItem';
 
 const Items = styled.div`

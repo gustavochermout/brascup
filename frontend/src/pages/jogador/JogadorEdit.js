@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { ContainerEdit, Line, Button, ButtonHover, Title, Footer, CancelButton, CancelButtonHover, Label, Input, Form, Select } from '../components/Styles';
-import api from '../services/api';
+import { ContainerEdit, Line, Button, ButtonHover, Title, Footer, CancelButton, CancelButtonHover, Label, Input, Form, Select } from '../../components/Styles';
+import api from '../../services/api';
 
-import * as TimeActions from '../store/actions/Time';
+import * as TimeActions from '../../store/actions/Time';
 
 function JogadorEdit({ times, dispatch }) {
     const [nome, setNome] = useState('');

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import List from '../components/List';
-import api from '../services/api';
+import List from '../../components/list/List';
+import api from '../../services/api';
 
-import * as TimeActions from '../store/actions/Time';
+import * as TimeActions from '../../store/actions/Time';
 
 function TimeList({ times, dispatch }) {
     useEffect(() => {

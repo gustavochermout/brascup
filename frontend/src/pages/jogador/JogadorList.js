@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import List from '../components/List';
-import api from '../services/api';
+import List from '../../components/list/List';
+import api from '../../services/api';
 
 export default function JogadorList() {
     const [jogadores, setJogadores] = useState([]);

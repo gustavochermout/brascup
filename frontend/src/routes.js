@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-import TorneioList from './pages/TorneioList';
-import TimeEdit from './pages/TimeEdit';
-import TimeList from './pages/TimeList';
-import JogadorEdit from './pages/JogadorEdit';
-import JogadorList from './pages/JogadorList';
-import Header from './components/Header';
+import TorneioList from './pages/torneio/TorneioList';
+import TimeEdit from './pages/time/TimeEdit';
+import TimeList from './pages/time/TimeList';
+import JogadorEdit from './pages/jogador/JogadorEdit';
+import JogadorList from './pages/jogador/JogadorList';
+import Header from './components/header/Header';
 
 export default function Routes() {
     return (

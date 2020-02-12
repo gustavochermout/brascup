@@ -1,6 +1,6 @@
 import React from 'react';
 
-import List from '../components/List';
+import List from '../../components/list/List';
 
 export default function TorneioList() {
     return (
