@@ -1,14 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { ContainerEdit, Line, Button, ButtonHover, Title, Footer, CancelButton, CancelButtonHover, Label, Input, Form, Select } from '../components/Styles';
+import api from '../services/api';
 
-export default function JogadorEdit() {
+import * as TimeActions from '../store/actions/Time';
+
+function JogadorEdit({ times, dispatch }) {
     const [nome, setNome] = useState('');
-    const [idade, setIdade] = useState(null);
+    const [idade, setIdade] = useState('');
+    const [timeId, setTimeId] = useState('');
+
+    useEffect(() => {
+        async function loadTimes() {
+            if (times.length === 0){
+                const response = await api.get('/time');
+                dispatch(TimeActions.setTimes(response.data));
+            }
+        }
+
+        loadTimes();
+    }, [dispatch, times]);
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        await api.post('/jogador', {
+            nome,
+            idade: Number(idade),
+            timeId: Number(timeId)
+        });
+
+        setNome('');
+        setIdade('');
+        setTimeId('');
+    }
 
     return (
-        <ContainerEdit>
+        <ContainerEdit onSubmit={handleSubmit}>
             <Form>
                 <Title>Jogador</Title>
                 <Line />
@@ -37,7 +67,15 @@ export default function JogadorEdit() {
                 <Label>Time</Label>
                 <Select 
                     id="time"
-                />
+                    required
+                    value={timeId}
+                    onChange={e => setTimeId(e.target.value)}
+                >
+                    <option value="" defaultValue></option>
+                    {times.map(time => (
+                        <option key={time.id} value={time.id}>{time.nome}</option>
+                    ))}
+                </Select>
 
                 <Line />
                 <Footer>
@@ -54,3 +92,5 @@ export default function JogadorEdit() {
         </ContainerEdit>
     )
 }
+
+export default connect(state => ({ times: state.Time.times }))(JogadorEdit);
