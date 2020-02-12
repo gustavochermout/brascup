@@ -1,6 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
+import styled from 'styled-components';
+
+export const StyledNavLink = styled(NavLink)`
+    color: #808080; 
+    margin-right: 10px; 
+
+    &:hover { 
+        color: #404040; 
+        text-decoration: none;
+    }
+`
 
 export default function Header() {
     return (
@@ -11,9 +22,9 @@ export default function Header() {
             <Navbar.Toggle aria-controls="basic-navbar-nav"/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <NavLink exact activeClassName="active" to="/">Torneios</NavLink>
-                    <NavLink exact activeClassName="active" to="/times">Times</NavLink>
-                    <NavLink exact activeClassName="active" to="/jogadores">Jogadores</NavLink>
+                    <StyledNavLink exact activeClassName="active" to="/">Torneios</StyledNavLink>
+                    <StyledNavLink exact activeClassName="active" to="/times">Times</StyledNavLink>
+                    <StyledNavLink exact activeClassName="active" to="/jogadores">Jogadores</StyledNavLink>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
