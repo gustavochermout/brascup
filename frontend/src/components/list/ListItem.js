@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ListGroup, Col } from 'react-bootstrap';
-import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faTrash, faFutbol } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Item = styled.div`
@@ -22,11 +22,15 @@ const Icons = styled.div`
 
 const Icon = styled.div`
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 12px;
     color: #5C5C5C;
 `
 
-export default function ListItem({ item }) {
+const AdjustedIcon = styled(FontAwesomeIcon)`
+    margin-top: 5px;
+`
+
+export default function ListItem({ item, viewIcon }) {
     return (
         <ListGroup.Item className="py-1">
             <Item>
@@ -35,6 +39,9 @@ export default function ListItem({ item }) {
                 </Col>
                 <Col>
                     <Icons>
+                        {viewIcon ? <Icon>
+                            <AdjustedIcon icon={faFutbol} />
+                        </Icon> : null}
                         <Icon>
                             <FontAwesomeIcon icon={faEdit} />
                         </Icon>
