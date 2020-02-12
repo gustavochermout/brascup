@@ -55,7 +55,7 @@ function TimeEdit({ times, dispatch }) {
                 <Footer>
                     <Link to="/times">
                         <CancelButtonHover>
-                            <CancelButton>Voltar</CancelButton>
+                            <CancelButton type="button">Voltar</CancelButton>
                         </CancelButtonHover>
                     </Link>
                     <ButtonHover>

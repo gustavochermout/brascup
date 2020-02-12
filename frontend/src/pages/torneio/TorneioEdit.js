@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import history from '../../history';
 import api from '../../services/api';
 import { ContainerEdit, Line, Button, ButtonHover, Title, Footer, CancelButton, CancelButtonHover, Label, Input, Form } from '../../components/Styles';
 
@@ -10,11 +11,11 @@ export default function TorneioEdit() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        await api.post('/torneio', {
+        const response = await api.post('/torneio', {
             nome
         });
 
-        setNome('');
+        history.push(`/torneios-classificacao/${response.data.id}`);
     }
 
     return (
@@ -37,7 +38,7 @@ export default function TorneioEdit() {
                 <Footer>
                     <Link to="/">
                         <CancelButtonHover>
-                            <CancelButton>Voltar</CancelButton>
+                            <CancelButton type="button">Voltar</CancelButton>
                         </CancelButtonHover>
                     </Link>
                     <ButtonHover>

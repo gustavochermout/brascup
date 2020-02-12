@@ -81,7 +81,7 @@ function JogadorEdit({ times, dispatch }) {
                 <Footer>
                     <Link to="/jogadores">
                         <CancelButtonHover>
-                            <CancelButton>Voltar</CancelButton>
+                            <CancelButton type="button">Voltar</CancelButton>
                         </CancelButtonHover>
                     </Link>
                     <ButtonHover>
