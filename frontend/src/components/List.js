@@ -19,9 +19,9 @@ export default function List({ title, items, linkToNew }) {
             <Line />
             <Items>
                 <ListGroup variant="flush">
-                    {items.map(item => (
+                    {items ? items.map(item => (
                         <ListItem key={item.id} item={item}/>     
-                    ))}
+                    )) : null}
             </ListGroup>
             </Items>
             <Line />
