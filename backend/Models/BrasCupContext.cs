@@ -12,6 +12,7 @@ namespace BrasCup.Models
         public DbSet<Time> Time { get; set; }
         public DbSet<Jogador> Jogador { get; set; }
         public DbSet<Torneio> Torneio { get; set; }
+        public DbSet<Inscricao> Inscricao { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
