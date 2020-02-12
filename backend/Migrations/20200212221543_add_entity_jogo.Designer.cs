@@ -2,15 +2,17 @@
 using BrasCup.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace backend.Migrations
 {
     [DbContext(typeof(BrasCupContext))]
-    partial class BrasCupContextModelSnapshot : ModelSnapshot
+    [Migration("20200212221543_add_entity_jogo")]
+    partial class add_entity_jogo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,16 +90,11 @@ namespace backend.Migrations
                     b.Property<int>("TimeVisitanteId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TorneioId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("TimeCasaId");
 
                     b.HasIndex("TimeVisitanteId");
-
-                    b.HasIndex("TorneioId");
 
                     b.ToTable("Jogo");
                 });
@@ -170,12 +167,6 @@ namespace backend.Migrations
                     b.HasOne("BrasCup.Models.Time", "timeVisitante")
                         .WithMany()
                         .HasForeignKey("TimeVisitanteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BrasCup.Models.Torneio", "torneio")
-                        .WithMany()
-                        .HasForeignKey("TorneioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

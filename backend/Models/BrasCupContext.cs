@@ -13,13 +13,6 @@ namespace BrasCup.Models
         public DbSet<Jogador> Jogador { get; set; }
         public DbSet<Torneio> Torneio { get; set; }
         public DbSet<Inscricao> Inscricao { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Jogador>()
-                .HasOne(j => j.time)
-                .WithMany(t => t.Jogadores)
-                .HasForeignKey(j => j.TimeId);
-        }
+        public DbSet<Jogo> Jogo { get; set; }
     }
 }

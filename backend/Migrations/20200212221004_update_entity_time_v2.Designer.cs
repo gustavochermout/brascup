@@ -2,15 +2,17 @@
 using BrasCup.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace backend.Migrations
 {
     [DbContext(typeof(BrasCupContext))]
-    partial class BrasCupContextModelSnapshot : ModelSnapshot
+    [Migration("20200212221004_update_entity_time_v2")]
+    partial class update_entity_time_v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,45 +63,6 @@ namespace backend.Migrations
                     b.HasIndex("TimeId");
 
                     b.ToTable("Jogador");
-                });
-
-            modelBuilder.Entity("BrasCup.Models.Jogo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("GolsTimeCasa")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("GolsTimeVisitante")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("PontuacaoTimeCasa")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("PontuacaoTimeVisitante")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TimeCasaId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TimeVisitanteId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TorneioId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TimeCasaId");
-
-                    b.HasIndex("TimeVisitanteId");
-
-                    b.HasIndex("TorneioId");
-
-                    b.ToTable("Jogo");
                 });
 
             modelBuilder.Entity("BrasCup.Models.Time", b =>
@@ -155,27 +118,6 @@ namespace backend.Migrations
                     b.HasOne("BrasCup.Models.Time", "time")
                         .WithMany()
                         .HasForeignKey("TimeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BrasCup.Models.Jogo", b =>
-                {
-                    b.HasOne("BrasCup.Models.Time", "timeCasa")
-                        .WithMany()
-                        .HasForeignKey("TimeCasaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BrasCup.Models.Time", "timeVisitante")
-                        .WithMany()
-                        .HasForeignKey("TimeVisitanteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BrasCup.Models.Torneio", "torneio")
-                        .WithMany()
-                        .HasForeignKey("TorneioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
