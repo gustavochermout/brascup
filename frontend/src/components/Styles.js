@@ -12,7 +12,7 @@ export const Line = styled.hr`
 export const Button = styled.button`
     border: 0;
     border-radius: 2px;
-    width: 200px;
+    width: 120px;
     height: 42px;
     padding: 0 20px;
     font-size: 16px;
@@ -38,7 +38,7 @@ export const Footer = styled.div`
 export const CancelButton = styled.button`
     border: 0;
     border-radius: 2px;
-    width: 200px;
+    width: 120px;
     height: 42px;
     padding: 0 20px;
     font-size: 16px;

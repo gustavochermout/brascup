@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
-import { ContainerList, Title, Line } from '../../components/Styles';
+import { ContainerList, Title, Line, Button, ButtonHover, CancelButton, CancelButtonHover, Footer } from '../../components/Styles';
 import api from '../../services/api';
 
 export default function TorneioStandings() {
@@ -24,7 +24,23 @@ export default function TorneioStandings() {
     return (
         <ContainerList>
             <Title>{nome}</Title>
-            <Line />    
+            <Line />   
+            <Line />
+            <Footer>
+                <Link to="/">
+                    <CancelButtonHover>
+                        <CancelButton type="button">Voltar</CancelButton>
+                    </CancelButtonHover>
+                </Link>
+                <ButtonHover>
+                    <Button type="button">Partida</Button>
+                </ButtonHover>
+                <Link to={`/inscricao/${torneioId}`}>
+                    <ButtonHover>
+                        <Button type="button">Inscrição</Button>
+                    </ButtonHover>
+                </Link>
+            </Footer> 
         </ContainerList>
     )   
 }

@@ -8,6 +8,7 @@ import TimeEdit from './pages/time/TimeEdit';
 import TimeList from './pages/time/TimeList';
 import JogadorEdit from './pages/jogador/JogadorEdit';
 import JogadorList from './pages/jogador/JogadorList';
+import Inscricao from './pages/inscricao/Inscricao';
 import Header from './components/header/Header';
 import history from './history';
 
@@ -23,6 +24,7 @@ export default function Routes() {
                 <Route path="/times-edicao" exact component={TimeEdit}/>
                 <Route path="/jogadores" exact component={JogadorList}/>
                 <Route path="/jogadores-edicao" exact component={JogadorEdit}/>
+                <Route path="/inscricao/:torneioId" exact component={Inscricao}/>
             </Switch>
         </Router>
     )
