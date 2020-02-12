@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import api from '../services/api';
 import { ContainerEdit, Line, Button, ButtonHover, Title, Footer, CancelButton, CancelButtonHover, Label, Input, Form } from '../components/Styles';
 
-export default function TimeEdit() {
+import * as TimeActions from '../store/actions/Time';
+
+function TimeEdit({ times, dispatch }) {
     const [nome, setNome] = useState('');
     const [tecnico, setTecnico] = useState('');
 
     async function handleSubmit(e) {
         e.preventDefault();
 
-        await api.post('/time', {
+        const response = await api.post('/time', {
             nome,
             tecnico
         });
+
+        const newTimes = [...times, response.data];
+        dispatch(TimeActions.setTimes(newTimes));
 
         setNome('');
         setTecnico('');
@@ -60,3 +66,5 @@ export default function TimeEdit() {
         </ContainerEdit>
     )
 }
+
+export default connect(state => ({ times: state.Time.times }))(TimeEdit);
