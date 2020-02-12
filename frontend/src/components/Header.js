@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 export const StyledNavLink = styled(NavLink)`
     color: #808080; 
-    margin-right: 10px; 
+    margin-right: 15px; 
 
     &:hover { 
         color: #404040; 

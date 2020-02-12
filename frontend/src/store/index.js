@@ -1,17 +1,7 @@
 import { createStore } from 'redux';
 
-const INITIAL_STATE = {
-    times: []
-};
+import rootReducer from './reducers';
 
-function reducer(state = INITIAL_STATE, action) {
-    if (action.type === "SET_TIMES") {
-        return { ...state, times: action.times };
-    }
-    
-    return state;
-}
-
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 export default store;

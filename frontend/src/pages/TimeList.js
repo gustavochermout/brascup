@@ -4,19 +4,14 @@ import { connect } from 'react-redux';
 import List from '../components/List';
 import api from '../services/api';
 
-function setTimes(times) {
-    return {
-        type: 'SET_TIMES',
-        times
-    }
-}
+import * as TimeActions from '../store/actions/Time';
 
 function TimeList({ times, dispatch }) {
     useEffect(() => {
         async function loadTimes() {
             if (times.length === 0){
                 const response = await api.get('/time');
-                dispatch(setTimes(response.data));
+                dispatch(TimeActions.setTimes(response.data));
             }
         }
 
@@ -28,4 +23,4 @@ function TimeList({ times, dispatch }) {
     )
 }
 
-export default connect(state => ({ times: state.times }))(TimeList);
+export default connect(state => ({ times: state.Time.times }))(TimeList);
