@@ -4,6 +4,9 @@ import { ListGroup, Col } from 'react-bootstrap';
 import { faEdit, faTrash, faFutbol } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import * as TimeActions from '../../store/actions/Time';
+import api from '../../services/api';
+
 const Item = styled.div`
     width: 100%;
     display: flex;
@@ -30,7 +33,18 @@ const AdjustedIcon = styled(FontAwesomeIcon)`
     margin-top: 5px;
 `
 
-export default function ListItem({ item, viewIcon }) {
+export default function ListItem({ items, item, viewIcon, entity, setItems }) {
+
+    async function deleteItem() {
+        await api.delete(`/${entity}/${item.id}`);
+        const filteredItems = items.filter(i => i.id !== item.id);
+
+        if (entity === 'time')
+            setItems(TimeActions.setTimes(filteredItems)); 
+        else
+            setItems(filteredItems);
+    }
+
     return (
         <ListGroup.Item className="py-1">
             <Item>
@@ -46,7 +60,7 @@ export default function ListItem({ item, viewIcon }) {
                             <FontAwesomeIcon icon={faEdit} />
                         </Icon>
                         <Icon>
-                            <FontAwesomeIcon icon={faTrash} />
+                            <FontAwesomeIcon onClick={deleteItem} icon={faTrash} />
                         </Icon>
                     </Icons>
                 </Col>

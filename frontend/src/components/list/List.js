@@ -19,7 +19,7 @@ const MessageEmptyItems = styled.p`
     justify-content: center;
 `
 
-export default function List({ title, items, linkToNew, viewIcon, loading }) {
+export default function List({ title, items, linkToNew, viewIcon, loading, entity, setItems }) {
     return (
         <ContainerList>
             <Title>{title}</Title>
@@ -28,7 +28,14 @@ export default function List({ title, items, linkToNew, viewIcon, loading }) {
                 <ListGroup variant="flush">
                     {(items.length > 0) ? 
                         items.map(item => (
-                            <ListItem key={item.id} item={item} viewIcon={viewIcon}/>     
+                            <ListItem 
+                                key={item.id} 
+                                items={items} 
+                                item={item} 
+                                viewIcon={viewIcon} 
+                                entity={entity}
+                                setItems={setItems}
+                            />     
                         )) :  
                         <ListGroup.Item className="py-1">
                             <MessageEmptyItems>{loading ? 'Carregando...' : 'Clique em "Novo" para começar! :)'}</MessageEmptyItems>

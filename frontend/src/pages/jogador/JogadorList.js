@@ -24,6 +24,8 @@ export default function JogadorList() {
             items={jogadores} 
             viewIcon={false}
             loading={loading}
+            entity="jogador"
+            setItems={setJogadores}
         />
     )
 }

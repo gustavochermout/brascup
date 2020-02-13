@@ -24,6 +24,8 @@ export default function TorneioList() {
             items={torneios} 
             viewIcon={true}
             loading={loading}
+            entity="torneio"
+            setItems={setTorneios}
         />
     )
 }

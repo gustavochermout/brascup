@@ -29,6 +29,8 @@ function TimeList({ times, dispatch }) {
             items={times} 
             viewIcon={false}
             loading={loading}
+            entity="time"
+            setItems={dispatch}
         />
     )
 }
