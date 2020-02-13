@@ -38,8 +38,8 @@ function JogadorEdit({ times, dispatch }) {
     }
 
     return (
-        <ContainerEdit onSubmit={handleSubmit}>
-            <Form>
+        <ContainerEdit >
+            <Form onSubmit={handleSubmit}>
                 <Title>Jogador</Title>
                 <Line />
 
