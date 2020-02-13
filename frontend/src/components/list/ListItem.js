@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ListGroup, Col } from 'react-bootstrap';
 import { faEdit, faTrash, faFutbol } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from 'react-router-dom';
 
 import * as TimeActions from '../../store/actions/Time';
 import api from '../../services/api';
@@ -53,9 +54,13 @@ export default function ListItem({ items, item, viewIcon, entity, setItems }) {
                 </Col>
                 <Col>
                     <Icons>
-                        {viewIcon ? <Icon>
-                            <AdjustedIcon icon={faFutbol} />
-                        </Icon> : null}
+                        {viewIcon ? 
+                            <Link to={`/torneios-classificacao/${item.id}`}>
+                                <Icon>
+                                    <AdjustedIcon icon={faFutbol} />
+                                </Icon>
+                            </Link> : null
+                        }
                         <Icon>
                             <FontAwesomeIcon icon={faEdit} />
                         </Icon>
