@@ -32,9 +32,11 @@ export default function TorneioStandings() {
                         <CancelButton type="button">Voltar</CancelButton>
                     </CancelButtonHover>
                 </Link>
-                <ButtonHover>
-                    <Button type="button">Partida</Button>
-                </ButtonHover>
+                <Link to={`/jogo/${torneioId}`}>
+                    <ButtonHover>
+                        <Button type="button">Partida</Button>
+                    </ButtonHover>
+                </Link>
                 <Link to={`/inscricao/${torneioId}`}>
                     <ButtonHover>
                         <Button type="button">Inscrição</Button>
