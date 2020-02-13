@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { ListGroup } from 'react-bootstrap';
+import styled from 'styled-components';
 
 import { ContainerList, Title, Line, Button, ButtonHover, CancelButton, CancelButtonHover, Footer } from '../../components/Styles';
 import api from '../../services/api';
+import StandingsDescription from '../../components/standings/StandingsDescription';
+
+const ContainerTimes = styled.div`
+    width: 100%;
+    height: 320px;
+    overflow-y: auto;
+`
 
 export default function TorneioStandings() {
     const { torneioId } = useParams();
@@ -24,7 +33,14 @@ export default function TorneioStandings() {
     return (
         <ContainerList>
             <Title>{nome}</Title>
-            <Line />   
+            <Line />
+            <ContainerTimes>   
+                <ListGroup variant="flush">
+                    <ListGroup.Item className="py-1">
+                        <StandingsDescription />
+                    </ListGroup.Item>
+                </ListGroup>
+            </ContainerTimes>
             <Line />
             <Footer>
                 <Link to="/">
