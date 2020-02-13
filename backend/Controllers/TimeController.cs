@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using BrasCup.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace BrasCup.Controllers
 {
@@ -29,6 +30,16 @@ namespace BrasCup.Controllers
                 return NotFound();
             
             return time;
+        }
+
+        [HttpGet("torneio/{torneioId}")]
+        public async Task<ActionResult<List<Time>>> GetTimeByTorneioId(int torneioId)
+        {
+            return await (from time in _context.Time
+                join inscricao in _context.Inscricao
+                on time.Id equals inscricao.TimeId
+                where inscricao.TorneioId == torneioId
+                select new Time(time.Id, time.Nome, time.Tecnico)).ToListAsync();   
         }
 
         [HttpPost]
