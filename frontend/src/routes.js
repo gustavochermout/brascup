@@ -11,6 +11,7 @@ import JogadorList from './pages/jogador/JogadorList';
 import Inscricao from './pages/inscricao/Inscricao';
 import Jogo from './pages/jogo/Jogo';
 import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 import history from './history';
 
 export default function Routes() {
@@ -28,6 +29,7 @@ export default function Routes() {
                 <Route path="/inscricao/:torneioId" exact component={Inscricao}/>
                 <Route path="/jogo/:torneioId" exact component={Jogo}/>
             </Switch>
+            <Footer />
         </Router>
     )
 }
