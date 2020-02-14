@@ -75,7 +75,7 @@ namespace BrasCup.Controllers
         }
 
         [HttpGet("classificacao/{torneioId}")]
-        public async Task<List<Classificacao>> GetDataFromDbBySqlQuery(int torneioId)
+        public async Task<List<Classificacao>> GetClassificacaoByTorneioId(int torneioId)
         {
             return await _context.Classificacao.FromSqlRaw(
                 " SELECT " + 

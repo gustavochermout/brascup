@@ -3,20 +3,13 @@ import styled from 'styled-components';
 import { ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import { ContainerList, Line, Button, ButtonHover, Title, Footer } from './../Styles';
+import { ContainerList, Line, Button, ButtonHover, Title, Footer, Message } from './../Styles';
 import ListItem from './ListItem';
 
 const Items = styled.div`
     width: 100%;
     height: 320px;
     overflow-y: auto;
-`
-
-const MessageEmptyItems = styled.p`
-    color: #808080;
-    font-size: 14px; 
-    display: flex;
-    justify-content: center;
 `
 
 export default function List({ title, items, linkToNew, viewIcon, loading, entity, setItems }) {
@@ -38,7 +31,7 @@ export default function List({ title, items, linkToNew, viewIcon, loading, entit
                             />     
                         )) :  
                         <ListGroup.Item className="py-1">
-                            <MessageEmptyItems>{loading ? 'Carregando...' : 'Clique em "Novo" para começar! :)'}</MessageEmptyItems>
+                            <Message>{loading ? 'Carregando...' : 'Clique em "Novo" para começar! :)'}</Message>
                         </ListGroup.Item>}
             </ListGroup>
             </Items>

@@ -65,6 +65,13 @@ export const Input = styled.input`
     margin-bottom: 10px;
 `
 
+export const Message = styled.p`
+    color: #808080;
+    font-size: 14px; 
+    font-style: italic;
+    height: 0px;
+`
+
 export default function Jogo() {
     const { torneioId } = useParams();
     const [times, setTimes] = useState([]);
@@ -185,7 +192,8 @@ export default function Jogo() {
                         </Select>
                     </ContainerSelectTimeVisitante>
                 </ContainerTimes>
-
+                
+                <Message>Apenas times com no mínimo 5 jogadores podem participar de uma partida.</Message>                
                 <Line />
                 <Footer>
                     <Link to={`/torneios-classificacao/${torneioId}`}>

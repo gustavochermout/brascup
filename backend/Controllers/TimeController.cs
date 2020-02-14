@@ -33,13 +33,26 @@ namespace BrasCup.Controllers
         }
 
         [HttpGet("torneio/{torneioId}")]
-        public async Task<ActionResult<List<Time>>> GetTimeByTorneioId(int torneioId)
+        public async Task<List<Time>> GetTimeByTorneioId(int torneioId)
         {
-            return await (from time in _context.Time
-                join inscricao in _context.Inscricao
-                on time.Id equals inscricao.TimeId
-                where inscricao.TorneioId == torneioId
-                select new Time(time.Id, time.Nome, time.Tecnico)).ToListAsync();   
+            return await _context.Time.FromSqlRaw(
+                "SELECT " +
+                "    \"Time\".\"Id\", \"Time\".\"Nome\", \"Time\".\"Tecnico\" " +
+                "FROM " +
+                "    public.\"Inscricao\" " +
+                "JOIN " +
+                "    public.\"Time\" " +
+                "    ON \"Time\".\"Id\" = \"Inscricao\".\"TimeId\" " +
+                "LEFT JOIN  " +
+                "    public.\"Jogador\" " +
+                "    ON \"Time\".\"Id\" = \"Jogador\".\"TimeId\" " +
+                "WHERE " +
+                "    \"Inscricao\".\"TorneioId\" = {0} " +
+                "GROUP BY " +
+                "    \"Time\".\"Id\", \"Time\".\"Nome\", \"Time\".\"Tecnico\" " +
+                "HAVING " +
+                "    COUNT(\"Jogador\".\"Nome\") >= 5 ", torneioId
+            ).ToListAsync();   
         }
 
         [HttpPost]

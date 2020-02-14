@@ -105,3 +105,10 @@ export const Select = styled.select`
     font-size: 15px;
     margin-bottom: 10px;
 `
+
+export const Message = styled.p`
+    color: #808080;
+    font-size: 14px; 
+    display: flex;
+    justify-content: center;
+`

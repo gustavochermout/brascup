@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ListGroup } from 'react-bootstrap';
 import styled from 'styled-components';
 
-import { ContainerList, Title, Line, Button, ButtonHover, CancelButton, CancelButtonHover, Footer } from '../../components/Styles';
+import { ContainerList, Title, Line, Button, ButtonHover, CancelButton, CancelButtonHover, Footer, Message } from '../../components/Styles';
 import api from '../../services/api';
 import StandingsDescription from '../../components/standings/StandingsDescription';
 import StandingsItem from '../../components/standings/StandingsItem';
@@ -12,13 +12,6 @@ const ContainerTimes = styled.div`
     width: 100%;
     height: 320px;
     overflow-y: auto;
-`
-
-const Message = styled.p`
-    color: #808080;
-    font-size: 14px; 
-    display: flex;
-    justify-content: center;
 `
 
 export default function TorneioStandings() {
