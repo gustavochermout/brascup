@@ -14,5 +14,6 @@ namespace BrasCup.Models
         public DbSet<Torneio> Torneio { get; set; }
         public DbSet<Inscricao> Inscricao { get; set; }
         public DbSet<Jogo> Jogo { get; set; }
+        public DbSet<Classificacao> Classificacao { get; set; }
     }
 }

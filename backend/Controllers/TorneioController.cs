@@ -73,5 +73,122 @@ namespace BrasCup.Controllers
 
             return torneio;
         }
+
+        [HttpGet("classificacao/{torneioId}")]
+        public async Task<List<Classificacao>> GetDataFromDbBySqlQuery(int torneioId)
+        {
+            return await _context.Classificacao.FromSqlRaw(
+                " SELECT " + 
+                "     * " +
+                " FROM " +
+                " ( " +
+                "     SELECT " +
+                "         ROW_NUMBER() OVER (ORDER BY Placar.\"Nome\") AS Id," +
+                "         Placar.\"Nome\", " +
+                "         SUM(Placar.\"pontos\") AS Pontos," +
+                "         SUM(Placar.\"partidas\") AS Partidas," +
+                "         SUM(Placar.\"vitorias\") AS Vitorias," +
+                "         SUM(Placar.\"empates\") AS Empates," +
+                "         SUM(Placar.\"derrotas\") AS Derrotas," +
+                "         SUM(Placar.\"golsfeitos\") AS GolsFeitos," +
+                "         SUM(Placar.\"golssofridos\") AS GolsSofridos," +
+                "         SUM(Placar.\"saldogols\") AS SaldoGols" +
+                "     FROM " +
+                " (" +
+                "     SELECT" +
+                "         \"Time\".\"Nome\"," +
+                "         COUNT(\"Jogo\".\"Id\") as Partidas," +
+                "         SUM(\"Jogo\".\"PontuacaoTimeCasa\") AS pontos," +
+                "         SUM(" +
+                "             CASE" +
+                "             WHEN \"Jogo\".\"PontuacaoTimeCasa\" = 3 THEN 1" +
+                "             ELSE 0" +
+                "             END " +
+                "         ) AS vitorias," +
+                "         SUM(" +
+                "             CASE" +
+                "             WHEN \"Jogo\".\"PontuacaoTimeCasa\" = 1 THEN 1" +
+                "             ELSE 0" +
+                "             END " +
+                "         ) AS empates," +
+                "         SUM(" +
+                "             CASE" +
+                "             WHEN \"Jogo\".\"PontuacaoTimeCasa\" = 0 THEN 1" +
+                "             ELSE 0" +
+                "             END " +
+                "         ) AS derrotas," +
+                "         SUM(\"Jogo\".\"GolsTimeCasa\") AS GolsFeitos," +
+                "         SUM(\"Jogo\".\"GolsTimeVisitante\") AS GolsSofridos," +
+                "         SUM(\"Jogo\".\"GolsTimeCasa\" - \"Jogo\".\"GolsTimeVisitante\") AS SaldoGols" +
+                "     FROM" +
+                "         public.\"Jogo\" " +
+                "     JOIN" +
+                "         public.\"Time\" " +
+                "         ON \"Jogo\".\"TimeCasaId\" = \"Time\".\"Id\" " +
+                "     WHERE" +
+                "         \"Jogo\".\"TorneioId\" = {0}" +
+                "     GROUP BY" +
+                "       \"Time\".\"Nome\" " +
+                "     UNION" +
+                "     SELECT" +
+                "         \"Time\".\"Nome\"," +
+                "         COUNT(\"Jogo\".\"Id\") as Partidas, " +
+                "         SUM(\"Jogo\".\"PontuacaoTimeVisitante\") AS pontos," +
+                "         SUM(" +
+                "             CASE" +
+                "             WHEN \"Jogo\".\"PontuacaoTimeVisitante\" = 3 THEN 1" +
+                "             ELSE 0" +
+                "             END " +
+                "         ) AS vitorias," +
+                "         SUM(" +
+                "             CASE" +
+                "             WHEN \"Jogo\".\"PontuacaoTimeVisitante\" = 1 THEN 1" +
+                "             ELSE 0" +
+                "             END " +
+                "         ) AS empates," +
+                "         SUM(" +
+                "             CASE" +
+                "             WHEN \"Jogo\".\"PontuacaoTimeVisitante\" = 0 THEN 1" +
+                "             ELSE 0" +
+                "             END " +
+                "         ) AS derrotas," +
+                "         SUM(\"Jogo\".\"GolsTimeVisitante\") AS GolsFeitos," +
+                "         SUM(\"Jogo\".\"GolsTimeCasa\") AS GolsSofridos," +
+                "         SUM(\"Jogo\".\"GolsTimeVisitante\" - \"Jogo\".\"GolsTimeCasa\") AS SaldoGols" +
+                "     FROM" +
+                "         public.\"Jogo\" " +
+                "     JOIN" +
+                "         public.\"Time\" " +
+                "         ON \"Jogo\".\"TimeVisitanteId\" = \"Time\".\"Id\"" +
+                "     WHERE" +
+                "         \"Jogo\".\"TorneioId\" = {0} " +
+                "     GROUP BY" +
+                "        \"Time\".\"Nome\"" +
+                "     UNION" +
+                "     SELECT" +
+                "         \"Time\".\"Nome\"," +
+                "         0 AS Pontos," +
+                "         0 AS Partidas," +
+                "         0 AS Vitorias," +
+                "         0 AS Empates," +
+                "         0 AS Derrotas," +
+                "         0 AS GolsFeitos," +
+                "         0 AS GolsSofridos," +
+                "         0 AS SaldoGols" +
+                "     FROM" +
+                "         public.\"Inscricao\"" +
+                "     JOIN" +
+                "         public.\"Time\"" +
+                "         ON \"Time\".\"Id\" = \"Inscricao\".\"TimeId\"" +
+                "     WHERE" +
+                "         \"Inscricao\".\"TorneioId\" = {0}" +
+                " ) AS Placar" +
+                " GROUP BY" +
+                "     Placar.\"Nome\"" +
+                " ) AS Classificacao" +
+                " ORDER BY" +
+                "    Classificacao.\"pontos\" DESC", torneioId                 
+            ).ToListAsync();
+        }
     }
 }
