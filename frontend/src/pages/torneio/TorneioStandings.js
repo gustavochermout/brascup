@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { ContainerList, Title, Line, Button, ButtonHover, CancelButton, CancelButtonHover, Footer } from '../../components/Styles';
 import api from '../../services/api';
 import StandingsDescription from '../../components/standings/StandingsDescription';
+import StandingsItem from '../../components/standings/StandingsItem';
 
 const ContainerTimes = styled.div`
     width: 100%;
@@ -13,9 +14,18 @@ const ContainerTimes = styled.div`
     overflow-y: auto;
 `
 
+const MessageLoading = styled.p`
+    color: #808080;
+    font-size: 14px; 
+    display: flex;
+    justify-content: center;
+`
+
 export default function TorneioStandings() {
     const { torneioId } = useParams();
     const [nome, setNome] = useState('');
+    const [classificacao, setClassificacao] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         async function loadTorneio() {
@@ -27,19 +37,28 @@ export default function TorneioStandings() {
             }    
         }
 
+        async function loadClassificacao() {
+            const response = await api.get(`/torneio/classificacao/${torneioId}`);
+            setClassificacao(response.data);
+            setLoading(false);
+        }
+
         loadTorneio();
+        loadClassificacao();
     }, [torneioId]);
 
     return (
         <ContainerList>
             <Title>{nome}</Title>
             <Line />
-            <ContainerTimes>   
-                <ListGroup variant="flush">
-                    <ListGroup.Item className="py-1">
+            <ContainerTimes>
+                {!loading ?   
+                    <ListGroup variant="flush">
                         <StandingsDescription />
-                    </ListGroup.Item>
-                </ListGroup>
+                        {classificacao.map(time => <StandingsItem key={time.id} item={time}/>)}
+                    </ListGroup> : 
+                    <MessageLoading>Carregando...</MessageLoading>
+                }
             </ContainerTimes>
             <Line />
             <Footer>

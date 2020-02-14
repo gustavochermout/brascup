@@ -79,11 +79,11 @@ namespace BrasCup.Controllers
         {
             return await _context.Classificacao.FromSqlRaw(
                 " SELECT " + 
+                "     ROW_NUMBER() OVER (ORDER BY Classificacao.\"pontos\" DESC, Classificacao.\"vitorias\" DESC, Classificacao.\"saldogols\" DESC) AS Id," +
                 "     * " +
                 " FROM " +
                 " ( " +
                 "     SELECT " +
-                "         ROW_NUMBER() OVER (ORDER BY Placar.\"Nome\") AS Id," +
                 "         Placar.\"Nome\", " +
                 "         SUM(Placar.\"pontos\") AS Pontos," +
                 "         SUM(Placar.\"partidas\") AS Partidas," +
@@ -187,7 +187,7 @@ namespace BrasCup.Controllers
                 "     Placar.\"Nome\"" +
                 " ) AS Classificacao" +
                 " ORDER BY" +
-                "    Classificacao.\"pontos\" DESC", torneioId                 
+                "    Classificacao.\"pontos\" DESC, Classificacao.\"vitorias\" DESC, Classificacao.\"saldogols\" DESC", torneioId                 
             ).ToListAsync();
         }
     }
