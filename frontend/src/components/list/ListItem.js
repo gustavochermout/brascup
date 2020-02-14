@@ -36,6 +36,19 @@ const AdjustedIcon = styled(FontAwesomeIcon)`
 
 export default function ListItem({ items, item, viewIcon, entity, setItems }) {
 
+    function returnEditPageByEntity() {
+        if (entity === 'time')
+            return `/times-edicao/${item.id}`;
+        
+        if (entity === 'torneio')
+            return `/torneios-edicao/${item.id}`;
+        
+        if (entity === 'jogador')
+            return `/jogadores-edicao/${item.id}`;
+        
+        return '';
+    }
+
     async function deleteItem() {
         await api.delete(`/${entity}/${item.id}`);
         const filteredItems = items.filter(i => i.id !== item.id);
@@ -61,9 +74,11 @@ export default function ListItem({ items, item, viewIcon, entity, setItems }) {
                                 </Icon>
                             </Link> : null
                         }
-                        <Icon>
-                            <FontAwesomeIcon icon={faEdit} />
-                        </Icon>
+                        <Link to={returnEditPageByEntity}>
+                            <Icon>
+                                <FontAwesomeIcon icon={faEdit} />
+                            </Icon>
+                        </Link>
                         <Icon>
                             <FontAwesomeIcon onClick={deleteItem} icon={faTrash} />
                         </Icon>
