@@ -29,7 +29,7 @@ function JogadorEdit({ times, dispatch }) {
 
                 const response = await api.get(`/jogador/${jogadorId}`);
                 setNome(response.data.nome);
-                setIdade(response.data.idade);
+                setIdade(response.data.idade === 0 ? '' : response.data.idade);
                 setTimeId(response.data.timeId);
             }
         }
