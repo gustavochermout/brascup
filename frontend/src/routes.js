@@ -27,6 +27,7 @@ export default function Routes() {
                 <Route path="/times-edicao" exact component={TimeEdit}/>
                 <Route path="/jogadores" exact component={JogadorList}/>
                 <Route path="/jogadores-edicao" exact component={JogadorEdit}/>
+                <Route path="/jogadores-edicao/:jogadorId" exact component={JogadorEdit}/>
                 <Route path="/inscricao/:torneioId" exact component={Inscricao}/>
                 <Route path="/jogo/:torneioId" exact component={Jogo}/>
             </Switch>

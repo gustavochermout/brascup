@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { ContainerEdit, Line, Button, ButtonHover, Title, Footer, CancelButton, CancelButtonHover, Label, Input, Form, Select } from '../../components/Styles';
 import api from '../../services/api';
 
 import * as TimeActions from '../../store/actions/Time';
+import history from '../../history';
 
 function JogadorEdit({ times, dispatch }) {
     const [nome, setNome] = useState('');
     const [idade, setIdade] = useState('');
     const [timeId, setTimeId] = useState('');
+    const { jogadorId } = useParams();
+    const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
         async function loadTimes() {
@@ -20,17 +23,40 @@ function JogadorEdit({ times, dispatch }) {
             }
         }
 
+        async function setPageMode() {
+            if (jogadorId) {
+                setEditMode(true);
+
+                const response = await api.get(`/jogador/${jogadorId}`);
+                setNome(response.data.nome);
+                setIdade(response.data.idade);
+                setTimeId(response.data.timeId);
+            }
+        }
+
         loadTimes();
-    }, [dispatch, times]);
+        setPageMode();
+    }, [dispatch, times, jogadorId]);
 
     async function handleSubmit(e) {
         e.preventDefault();
 
-        await api.post('/jogador', {
-            nome,
-            idade: Number(idade),
-            timeId: Number(timeId)
-        });
+        if (!editMode) {
+            await api.post('/jogador', {
+                nome,
+                idade: Number(idade),
+                timeId: Number(timeId)
+            });
+        }else {
+            await api.put(`/jogador/${jogadorId}`, {
+                id: Number(jogadorId),
+                nome,
+                idade: Number(idade),
+                timeId: Number(timeId)
+            });
+            
+            history.push('/jogadores');
+        }
 
         setNome('');
         setIdade('');
