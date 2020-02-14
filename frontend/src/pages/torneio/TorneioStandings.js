@@ -14,7 +14,7 @@ const ContainerTimes = styled.div`
     overflow-y: auto;
 `
 
-const MessageLoading = styled.p`
+const Message = styled.p`
     color: #808080;
     font-size: 14px; 
     display: flex;
@@ -52,12 +52,14 @@ export default function TorneioStandings() {
             <Title>{nome}</Title>
             <Line />
             <ContainerTimes>
-                {!loading ?   
-                    <ListGroup variant="flush">
-                        <StandingsDescription />
-                        {classificacao.map(time => <StandingsItem key={time.id} item={time}/>)}
-                    </ListGroup> : 
-                    <MessageLoading>Carregando...</MessageLoading>
+                {!loading ?
+                    classificacao.length > 0 ?   
+                        <ListGroup variant="flush">
+                            <StandingsDescription />
+                            {classificacao.map(time => <StandingsItem key={time.id} item={time}/>)}
+                        </ListGroup> : 
+                    <Message>Inscreva times no torneio para começarmos! :)</Message> : 
+                <Message>Carregando...</Message>
                 }
             </ContainerTimes>
             <Line />
