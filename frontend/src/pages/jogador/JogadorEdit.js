@@ -38,25 +38,32 @@ function JogadorEdit({ times, dispatch }) {
         setPageMode();
     }, [dispatch, times, jogadorId]);
 
+    async function postJogador() {
+        await api.post('/jogador', {
+            nome,
+            idade: Number(idade),
+            timeId: Number(timeId)
+        });
+    }
+
+    async function putJogador() {
+        await api.put(`/jogador/${jogadorId}`, {
+            id: Number(jogadorId),
+            nome,
+            idade: Number(idade),
+            timeId: Number(timeId)
+        });
+        
+        history.push('/jogadores');
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if (!editMode) {
-            await api.post('/jogador', {
-                nome,
-                idade: Number(idade),
-                timeId: Number(timeId)
-            });
-        }else {
-            await api.put(`/jogador/${jogadorId}`, {
-                id: Number(jogadorId),
-                nome,
-                idade: Number(idade),
-                timeId: Number(timeId)
-            });
-            
-            history.push('/jogadores');
-        }
+        if (editMode)
+            putJogador();
+        else
+            postJogador();
 
         setNome('');
         setIdade('');

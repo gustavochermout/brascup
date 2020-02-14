@@ -23,23 +23,30 @@ export default function TorneioEdit() {
         setPageMode();
     }, [torneioId]);
 
+    async function postTorneio() {
+        const response = await api.post('/torneio', {
+            nome
+        });
+
+        history.push(`/torneios-classificacao/${response.data.id}`);
+    }
+
+    async function putTorneio() {
+        await api.put(`/torneio/${torneioId}`, {
+            id: Number(torneioId),
+            nome
+        });
+
+        history.push('/');
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if (!editMode){
-            const response = await api.post('/torneio', {
-                nome
-            });
-
-            history.push(`/torneios-classificacao/${response.data.id}`);
-        }else{
-            await api.put(`/torneio/${torneioId}`, {
-                id: Number(torneioId),
-                nome
-            });
-
-            history.push('/');
-        }
+        if (editMode)
+            putTorneio();
+        else
+            postTorneio();
     }
 
     return (

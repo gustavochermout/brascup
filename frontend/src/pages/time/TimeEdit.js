@@ -28,36 +28,43 @@ function TimeEdit({ times, dispatch }) {
         setPageMode();
     }, [timeId]);
 
+    async function postTime() {
+        const response = await api.post('/time', {
+            nome,
+            tecnico
+        });
+
+        const newTimes = [...times, response.data];
+        dispatch(TimeActions.setTimes(newTimes));
+    }
+
+    async function putTime() {
+        await api.put(`/time/${timeId}`, {
+            id: Number(timeId),
+            nome,
+            tecnico
+        });
+
+        const newTimes = times.map(time => {
+            if (time.id === Number(timeId)){
+                time.nome = nome;
+                time.tecnico = tecnico;
+            }
+
+            return time;
+        });
+        dispatch(TimeActions.setTimes(newTimes));
+
+        history.push('/times');
+    }
+
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if (!editMode) {
-            const response = await api.post('/time', {
-                nome,
-                tecnico
-            });
-
-            const newTimes = [...times, response.data];
-            dispatch(TimeActions.setTimes(newTimes));
-        }else {
-            await api.put(`/time/${timeId}`, {
-                id: Number(timeId),
-                nome,
-                tecnico
-            });
-
-            const newTimes = times.map(time => {
-                if (time.id === Number(timeId)){
-                    time.nome = nome;
-                    time.tecnico = tecnico;
-                }
-
-                return time;
-            });
-            dispatch(TimeActions.setTimes(newTimes));
-
-            history.push('/times');
-        }
+        if (editMode)
+            putTime();
+        else
+            postTime();
 
         setNome('');
         setTecnico('');
