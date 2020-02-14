@@ -31,6 +31,20 @@ namespace BrasCup.Controllers
             return inscricao;    
         } 
 
+        [HttpGet("torneio-time/{torneioId}/{timeId}")]
+        public async Task<List<Inscricao>> GetInscricaoByTorneioIdTimeId(int torneioId, int timeId)
+        {
+            return await _context.Inscricao.FromSqlRaw(
+                "SELECT " +
+                "    \"Inscricao\".* " +
+                "FROM " +
+                "    \"public\".\"Inscricao\" " +
+                "WHERE " +
+                $"    \"Inscricao\".\"TorneioId\" = {torneioId} " +
+                $"    AND \"Inscricao\".\"TimeId\" = {timeId} "
+            ).ToListAsync();   
+        } 
+
         [HttpPost]
         public async Task<ActionResult<Inscricao>> PostInscricao(Inscricao inscricao)
         {

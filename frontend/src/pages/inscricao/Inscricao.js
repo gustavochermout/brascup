@@ -25,12 +25,18 @@ function Inscricao({ times, dispatch }) {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        await api.post('/inscricao', {
-            torneioId: Number(torneioId),
-            timeId: Number(timeId)
-        });
+        const response = await api.get(`/inscricao/torneio-time/${torneioId}/${timeId}`);
 
-        setTimeId('');
+        if (!response.data.length){
+            await api.post('/inscricao', {
+                torneioId: Number(torneioId),
+                timeId: Number(timeId)
+            });
+
+            setTimeId('');
+        }else{
+            alert("O time selecionado já está inscrito no torneio!");
+        }
     }
 
     return (

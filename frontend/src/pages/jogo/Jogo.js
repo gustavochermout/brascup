@@ -113,20 +113,24 @@ export default function Jogo() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        api.post("/jogo", {
-            torneioId: Number(torneioId),
-            timeCasaId: Number(timeCasaId),
-            timeVisitanteId: Number(timeVisitanteId),
-            golsTimeCasa: Number(golsTimeCasa),
-            golsTimeVisitante: Number(golsTimeVisitante),
-            pontuacaoTimeCasa: getPointsTimeCasa(),
-            pontuacaoTimeVisitante: getPointsTimeVisitante() 
-        });
+        if (timeCasaId !== timeVisitanteId){
+            api.post("/jogo", {
+                torneioId: Number(torneioId),
+                timeCasaId: Number(timeCasaId),
+                timeVisitanteId: Number(timeVisitanteId),
+                golsTimeCasa: Number(golsTimeCasa),
+                golsTimeVisitante: Number(golsTimeVisitante),
+                pontuacaoTimeCasa: getPointsTimeCasa(),
+                pontuacaoTimeVisitante: getPointsTimeVisitante() 
+            });
 
-        setTimeCasaId('');
-        setGolsTimeCasa('');
-        setTimeVisitanteId('');
-        setGolsTimeVisitante('');
+            setTimeCasaId('');
+            setGolsTimeCasa('');
+            setTimeVisitanteId('');
+            setGolsTimeVisitante('');
+        }else{
+            alert("Selecione times diferentes para realizar uma partida!");
+        }
     }
 
     return (
