@@ -8,10 +8,14 @@ export const Label = styled.label`
     margin-bottom: 8px;
 `
 
+const StyledRow = styled(Row)`
+    margin-top: 5px;
+`
+
 export default function StandingsItem({ item }) {
     return (
         <ListGroup.Item className="py-1">
-            <Row>
+            <StyledRow>
                 <Col xs={4}>
                     <Label>{`${item.id}] ${item.nome}`}</Label>
                 </Col>
@@ -39,7 +43,7 @@ export default function StandingsItem({ item }) {
                 <Col>
                     <Label>{item.saldoGols}</Label>
                 </Col>
-            </Row>
+            </StyledRow>
         </ListGroup.Item>
     )
 }

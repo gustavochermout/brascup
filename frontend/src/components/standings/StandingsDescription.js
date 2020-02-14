@@ -1,12 +1,17 @@
 import React from 'react';
 import { Row, Col, ListGroup } from 'react-bootstrap';
+import styled from 'styled-components';
 
 import { Label } from '../Styles';
+
+const StyledRow = styled(Row)`
+    margin-top: 5px;
+`
 
 export default function StandingsDescription() {
     return (
         <ListGroup.Item className="py-1">
-            <Row>
+            <StyledRow>
                 <Col xs={4}>
                     <Label>Time</Label>
                 </Col>
@@ -34,7 +39,7 @@ export default function StandingsDescription() {
                 <Col>
                     <Label>SG</Label>
                 </Col>
-            </Row>
+            </StyledRow>
         </ListGroup.Item>
     )
 }
