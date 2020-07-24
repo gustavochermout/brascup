@@ -1,0 +1,12 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Torneio {
+  id: Int!
+  nome: String!
+}
+
+type Query {
+  torneios: [Torneio!]!
+}
